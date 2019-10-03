@@ -8,13 +8,17 @@
         Title="Lights Out!" Height="628.27" Width="459.169" Icon="LightsOut.ico" ResizeMode="NoResize" WindowStyle="None" AllowsTransparency="True" MouseDown="MainWindow_MouseDown">
 
     <Window.CommandBindings>
-        <CommandBinding Command="{x:Static local:MainWindow.New}"
-         Executed="New_Executed"
-         CanExecute="New_CanExecute" />
+        <CommandBinding Command="Help"
+         Executed="Help_Executed"
+         CanExecute="Help_CanExecute" />
 
-        <CommandBinding Command="{x:Static local:MainWindow.About}"
-         Executed="About_Execute"
-         CanExecute="About_CanExecute"/>
+        <CommandBinding Command="New"
+         Executed="New_Executed"
+         CanExecute="New_CanExecute"/>
+
+        <CommandBinding Command="Close"
+         Executed="Close_Executed"
+         CanExecute="Close_CanExecute"/>
     </Window.CommandBindings>
     
     <Grid HorizontalAlignment="Left" Width="459">
@@ -36,7 +40,7 @@
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
-        <Button x:Name="AboutButton" Content="?" Command="About" HorizontalAlignment="Left" Margin="197,134,0,0" VerticalAlignment="Top" Width="59" Height="40" FontSize="14">
+        <Button x:Name="AboutButton" Content="?" Command="Help" HorizontalAlignment="Left" Margin="197,134,0,0" VerticalAlignment="Top" Width="59" Height="40" FontSize="14">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
                     <GradientStop Color="#FFF3F3F3" Offset="0"/>

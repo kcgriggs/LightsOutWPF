@@ -22,8 +22,6 @@ namespace LightsOut
 {
     public partial class MainWindow : Window
     {
-        public static RoutedCommand New = new RoutedCommand();
-        public static RoutedCommand About= new RoutedCommand();
         private LightsOutGame game;
         private AboutWindow aboutWindow;
         public MainWindow()
@@ -131,6 +129,28 @@ namespace LightsOut
         private void New_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
             e.CanExecute = true;
+        }
+
+        private void Help_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            aboutWindow = new AboutWindow();
+            aboutWindow.ShowDialog();
+        }
+
+        private void Help_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = true;
+        }
+
+        private void Close_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            Close();
+        }
+
+        private void Close_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            if(game != null)
+                e.CanExecute = game.IsGameOver();
         }
 
     }
