@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LightsOut"
         mc:Ignorable="d"
-        Title="Lights Out!" Height="628.27" Width="459.169" Icon="LightsOut.ico" ResizeMode="NoResize" WindowStyle="None" AllowsTransparency="True" MouseDown="MainWindow_MouseDown">
+        Title="Lights Out!" Height="628.27" Width="459.169" Icon="LightsOut.ico" ResizeMode="NoResize" 
+        WindowStyle="None" AllowsTransparency="True" MouseDown="MainWindow_MouseDown">
 
     <Window.CommandBindings>
         <CommandBinding Command="Help"
@@ -20,42 +21,62 @@
          Executed="Close_Executed"
          CanExecute="Close_CanExecute"/>
     </Window.CommandBindings>
-    
+
+    <Window.Resources>
+        <ControlTemplate x:Key="ButtonTemplate" TargetType="Button">
+            <Border Name="Border" BorderThickness="2" CornerRadius="10"
+                BorderBrush="CornflowerBlue" Background="DeepSkyBlue">
+                <ContentPresenter HorizontalAlignment="Center"
+                        VerticalAlignment="Center"                                 
+                        TextBlock.FontWeight="Bold"  
+                        TextBlock.Foreground="Yellow"
+                        Content="{TemplateBinding Content}"/>
+            </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter TargetName="Border" Property="Background" Value="LightBlue" />
+                    <Setter TargetName="Border" Property="BorderBrush" Value="AliceBlue" />
+                </Trigger>
+
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter TargetName="Border" Property="Background" Value="LightYellow" />
+                    <Setter TargetName="Border" Property="BorderBrush" Value="Yellow" />
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+
+        <Style x:Key="DisabledButtonStyle" TargetType="Button" >
+            <Setter Property="Opacity" Value="1" />
+            <Style.Triggers>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Button.Opacity" Value="0.5" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+
     <Grid HorizontalAlignment="Left" Width="459">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="238*"/>
-            <ColumnDefinition Width="40*"/>
-            <ColumnDefinition Width="117*"/>
-            <ColumnDefinition Width="15*"/>
-        </Grid.ColumnDefinitions>
-        <Canvas x:Name="boardCanvas" HorizontalAlignment="center" Height="344" Margin="52,0,26,49" VerticalAlignment="bottom" Width="364" Grid.ColumnSpan="3"/>
-        <Button x:Name="ExitButton" Content="Exit" Command="Close" HorizontalAlignment="Left" Margin="44,134,0,0" VerticalAlignment="Top" Width="100" Height="40" FontSize="14" Grid.Column="1" Grid.ColumnSpan="2"/>
-        <Button x:Name="NewGameButton" Content="New Game" Command="New" HorizontalAlignment="Left" Margin="52,134,0,0" VerticalAlignment="Top" Width="100" Height="40" FontSize="14">
-            <Button.Background>
-                <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
-                    <GradientStop Color="#FFF3F3F3" Offset="0"/>
-                    <GradientStop Color="#FFEBEBEB" Offset="0.5"/>
-                    <GradientStop Color="#FFDDDDDD" Offset="0.5"/>
-                    <GradientStop Color="#FFCDCDCD" Offset="1"/>
-                </LinearGradientBrush>
-            </Button.Background>
-        </Button>
-        <Button x:Name="AboutButton" Content="?" Command="Help" HorizontalAlignment="Left" Margin="197,134,0,0" VerticalAlignment="Top" Width="59" Height="40" FontSize="14">
-            <Button.Background>
-                <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
-                    <GradientStop Color="#FFF3F3F3" Offset="0"/>
-                    <GradientStop Color="#FFEBEBEB" Offset="0.5"/>
-                    <GradientStop Color="#FFDDDDDD" Offset="0.5"/>
-                    <GradientStop Color="#FFCDCDCD" Offset="1"/>
-                </LinearGradientBrush>
-            </Button.Background>
+        <Canvas x:Name="boardCanvas" HorizontalAlignment="center" Height="344" Margin="52,0,43,82" 
+                VerticalAlignment="bottom" Width="364"/>
+        <Button x:Name="ExitButton" Content="Exit" Command="Close"  Style="{StaticResource DisabledButtonStyle}"
+                HorizontalAlignment="Left" Margin="303,134,0,0" VerticalAlignment="Top" Width="100" Height="40" 
+                FontSize="14" 
+                Template="{StaticResource ButtonTemplate}"/>
+
+        <Button x:Name="NewGameButton" Content="New Game" Command="New" HorizontalAlignment="Left" 
+                Margin="52,134,0,0" VerticalAlignment="Top" Width="100" Height="40" FontSize="14"
+                Template="{StaticResource ButtonTemplate}"/>
+
+        <Button x:Name="AboutButton" Content="?" Command="Help"  HorizontalAlignment="Left" 
+                Margin="197,134,0,0" VerticalAlignment="Top" Width="59" Height="40" FontSize="14" 
+                Template="{StaticResource ButtonTemplate}">
         </Button>
     </Grid>
     <Window.Background>
         <ImageBrush ImageSource="lightBulbBg.png" />
         <!-- Image source: https://clipartcrossword.com/light-bulb-clipart-image-12482/ -->
     </Window.Background>
-   
+
 
 </Window>
     

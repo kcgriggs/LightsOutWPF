@@ -1,7 +1,7 @@
 ﻿// Casey Griggs
 // COMP 4450
 // McCown
-// LightsOutWPF
+// LightsOutWPF - Commands and Control Templates
 
 using System;
 using System.Collections.Generic;
@@ -72,7 +72,7 @@ namespace LightsOut
             DrawGrid();
             if(game.IsGameOver())
             {
-                MessageBox.Show("You've won!", "Victory!", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                MessageBox.Show("You've won!", "Victory!", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             // Event was handled
             e.Handled = true;
